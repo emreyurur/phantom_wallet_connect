@@ -33,14 +33,13 @@ const NetworkSelectScreen: React.FC = () => {
     if (dappKeyPair) {
       const params = new URLSearchParams({
         dapp_encryption_public_key: base58.encode(dappKeyPair.publicKey),
-        cluster: 'testnet', // Testnete bağlanmak için cluster parametresini testnet olarak ayarlayın
+        cluster: 'mainnet-beta', // Testnet için
         app_url: 'https://phantom.app',
-        redirect_link: 'nftTracker://onConnect',
+        redirect_link: 'myapp://onConnect', // Özel URL şemanızı buraya ekleyin
       });
-
-      // Phantom cüzdanını bağlamak için uygun URL'yi açın
+  
       const connectUrl = `${'phantom://'}v1/connect?${params.toString()}`;
-
+  
       try {
         await Linking.openURL(connectUrl);
       } catch (error) {
@@ -48,6 +47,7 @@ const NetworkSelectScreen: React.FC = () => {
       }
     }
   };
+  
 
   return (
     <View style={styles.container}>
